@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">uno</string>
+    <string name="title_activity_main">uno</string>
+    <string name="package_name">io.itzel.moviles</string>
+    <string name="custom_url_scheme">io.itzel.moviles</string>
+</resources>
