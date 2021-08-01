@@ -13,5 +13,26 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="4" *ngFor="let producto of listaProductos | async">
+        
+        <ion-item>
+          <ion-label>
+          <h1> {{ producto.titulo }} </h1>
+          <p> {{ producto.descripcion }} </p>
+          <p> {{ producto.precio }} </p>
+          <p> {{ producto.descuento }} </p>
+          <img [src]=" producto.imagenes[0] " alt="">
+          <ion-button expand="block" color="danger" (click)="eliminarProducto(producto.id, producto.titulo)">
+           Eliminar producto
+          </ion-button>
+          </ion-label>
+        </ion-item>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
 </ion-content>

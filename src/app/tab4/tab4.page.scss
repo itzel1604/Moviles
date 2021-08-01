@@ -1,0 +1,38 @@
+.tarjeta{
+    width: 350px;
+    height: 275px;
+    background-image: url('/assets/tarjeta.png');
+    background-size: cover;
+    padding: 85px 0px 0px 0px;
+    margin-top: -17% !important;
+    position: relative;
+    margin: 0 auto;
+    color: #ffff;
+}
+
+.p-numero, 
+.p-expira, 
+.p-cvv, 
+.p-titular{
+    position: absolute;
+}
+
+.p-numero{
+    bottom: 108px;
+    left: 155px;
+}
+
+.p-expira{
+    bottom: 88px;
+    left: 152px;
+}
+
+.p-cvv{
+    bottom: 69px;
+    left: 153px;
+}
+
+.p-titular{
+    bottom: 32px;
+    left: 54px;
+}

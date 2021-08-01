@@ -15,8 +15,40 @@
 
 <ion-content>
 
-<ion-button color="primary" expand="full">
-  Mostrar
-</ion-button>
+  <section class="tarjeta">
+    <p class="p-numero"> {{ separarNumero() }} </p>
+    <p class="p-expira"> VALID {{mes}}/{{anio}}  </p>
+    <p class="p-cvv"> {{cvv}}  </p>
+    <p class="p-titular"> {{titular}}  </p>
+  </section>
+
+  <ion-item>
+    <ion-label position="start">Número de tarjeta:</ion-label>
+    <ion-input type="number" [(ngModel)]="numero"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="start">Mes:</ion-label>
+    <ion-input type="text" [(ngModel)]="mes" maxlength="2"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="start">Año:</ion-label>
+    <ion-input type="text" [(ngModel)]="anio" maxlength="4"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="start">CVV:</ion-label>
+    <ion-input type="text" [(ngModel)]="cvv" maxlength="4"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="start">Titular:</ion-label>
+    <ion-input type="text" [(ngModel)]="titular" maxlength="40"></ion-input>
+  </ion-item>
+
+  <ion-button (click)="pagarConStripe()" expand="block">
+    Pagar
+  </ion-button>
 
 </ion-content>
