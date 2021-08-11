@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { Stripe } from '@ionic-native/stripe/ngx';
 import { environment } from 'src/environments/environment';
 
@@ -9,19 +9,25 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./tab4.page.scss'],
 })
 export class Tab4Page implements OnInit {
-  public numero: string = '';
-  public mes: string = '';
-  public anio: string = '';
-  public cvv: string= '';
-  public titular: string = '';
+  public numero: string = '5252525252525252';
+  public mes: string = '04';
+  public anio: string = '2022';
+  public cvv: string= '123';
+  public titular: string = 'Itzel García';
   credencialesTarjeta: any = {};
+  deshabilitarBoton: boolean = false;
+  public loading;
 
   constructor( 
     public alertController: AlertController,
-    public stripe: Stripe
+    public stripe: Stripe,
+    public loadingController: LoadingController
      ) { }
 
   ngOnInit() {
+    this.loading = this.loadingController.create({
+      message: "Espere por favor..."
+    })
   }
 
   separarNumero(){
@@ -29,7 +35,20 @@ export class Tab4Page implements OnInit {
     return nuevoNumero;
   }
 
+  async presentLoading(){
+    this.loading = await this.loadingController.create({
+      message: "Espere por favor..."
+    })
+    await this.loading.present();
+  }
+
+  async dismissLoading(){
+    await this.loading.dismiss()
+  }
+
   pagarConStripe(){
+    this.deshabilitarBoton = true;
+
     this.stripe.setPublishableKey(environment.stripeKey);
 
     this.credencialesTarjeta = {
@@ -41,19 +60,24 @@ export class Tab4Page implements OnInit {
 
     this.stripe.createCardToken(this.credencialesTarjeta)
     .then(token => {
-      console.log(token);
-
+      console.log(JSON.stringify(token));
+      this.presentarAlert("ok", `Token: ${token.id}`)
       //mandar el token al servidor
     })
     .catch(error => {
-      console.log(error);
+      this.presentarAlert("Error", error);
+      console.log(JSON.stringify(error));
     })
+    .finally(() => {
+      this.dismissLoading();
+      this.deshabilitarBoton = false
+    });
   }
 
-  async presentarAlert(){
+  async presentarAlert(encabezado: string, mensaje: string){
     const alert = await this.alertController.create({
-      header:"Titulo del alert",
-      subHeader:"Subtitulo",
+      header: encabezado,
+      subHeader:mensaje,
       message:"Hellooooo",
       inputs:[
         {

@@ -47,7 +47,7 @@
     <ion-input type="text" [(ngModel)]="titular" maxlength="40"></ion-input>
   </ion-item>
 
-  <ion-button (click)="pagarConStripe()" expand="block">
+  <ion-button (click)="pagarConStripe()" expand="block"[disabled]>="deshabilitarBoton"
     Pagar
   </ion-button>
 
